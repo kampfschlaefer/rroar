@@ -12,9 +12,9 @@ module Rroar
       @recording = false
       @recorded = []
       @myfuncs = {}
-      #print self.class.instance_methods(false)
+      #puts "#{self.class.instance_methods(false)}"
       self.class.instance_methods(false).each do |method|
-        #print "Should remove method #{method}"
+        puts "Should replace method #{method}"
         @myfuncs[method] = self.class.instance_method(method)
         self.class.class_eval do undef_method(method) end
         #self.class.undef_method method
@@ -24,6 +24,8 @@ module Rroar
       #  #self.class.class_eval("@@rr_#{method}.bind(self)")
       #  #self.class.class_eval("def #{method} { rr_#{method} }")
       end
+      puts "instance methods after my action#{self.class.instance_methods(false)}"
+      puts "myfuncs is #{@myfuncs}"
       #print self.class.instance_methods(false)
     end
 
